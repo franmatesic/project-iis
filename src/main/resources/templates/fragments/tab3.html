@@ -1,0 +1,45 @@
+<form class="d-flex flex-column card p-5 w-75" id="tab3-form" method="post" th:action="@{/ws}">
+    <h4>SOAP Search clubs</h4>
+    <input class="form-control mt-3" name="clubName" placeholder="Search club">
+    <button class="btn btn-primary mt-3" type="submit">Fetch</button>
+    <pre class="fs-6">
+        <code class="language-xml" id="tab3-result">
+        </code>
+    </pre>
+</form>
+
+<script>
+    let form3 = document.getElementById('tab3-form');
+    const result3 = document.getElementById('tab3-result');
+    form3.onsubmit = e => {
+        e.preventDefault();
+        fetch(form3.action, {
+            method: 'post',
+            headers: {
+                "Content-Type": "text/xml"
+            },
+            body: `<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:gs="localhost/clubs">
+                       <soapenv:Header/>
+                       <soapenv:Body>
+                          <gs:getClubRequest>
+                             <gs:name>${new FormData(form3).get('clubName')}</gs:name>
+                          </gs:getClubRequest>
+                       </soapenv:Body>
+                   </soapenv:Envelope>`
+        }).then(result => result.text()).then(html => {
+            result3.textContent = formatXml(html);
+            hljs.highlightAll();
+        }).catch(err => console.error(err));
+
+        function formatXml(xml, tab) {
+            let formatted = '', indent = '';
+            tab = tab || '\t';
+            xml.split(/>\s*</).forEach(function (node) {
+                if (node.match(/^\/\w/)) indent = indent.substring(tab.length);
+                formatted += indent + '<' + node + '>\r\n';
+                if (node.match(/^<?\w[^>]*[^\/]$/)) indent += tab;
+            });
+            return formatted.substring(1, formatted.length - 3).replaceAll('&amp;', '&');
+        }
+    }
+</script>

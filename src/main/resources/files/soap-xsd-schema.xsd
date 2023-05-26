@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+    <xs:element name="standings">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" name="rows">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="draws" type="xs:unsignedByte"/>
+                            <xs:element name="losses" type="xs:unsignedByte"/>
+                            <xs:element name="matches" type="xs:unsignedByte"/>
+                            <xs:element name="points" type="xs:unsignedByte"/>
+                            <xs:element name="position" type="xs:unsignedByte"/>
+                            <xs:element minOccurs="0" name="promotion">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="id" type="xs:unsignedShort"/>
+                                        <xs:element name="text" type="xs:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="scoresAgainst" type="xs:unsignedByte"/>
+                            <xs:element name="scoresFor" type="xs:unsignedByte"/>
+                            <xs:element name="team">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="name" type="xs:string"/>
+                                        <xs:element name="nameCode" type="xs:string"/>
+                                        <xs:element name="shortName" type="xs:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="wins" type="xs:unsignedByte"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

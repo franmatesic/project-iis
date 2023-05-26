@@ -1,0 +1,15 @@
+<form class="d-flex flex-column card p-5 w-50" id="tab5-form" method="post" th:action="@{/fetchWeather}">
+    <h4>Fetch city temperature</h4>
+    <input class="form-control mt-3" name="cityName" placeholder="City name">
+    <button class="btn btn-primary mt-3" type="submit">Fetch</button>
+    <p class="fs-4 my-3 overflow-auto" style="height: 400px;white-space: pre-line" th:text="${weather}"></p>
+</form>
+
+<script>
+    let form5 = document.getElementById('tab5-form');
+    form5.onsubmit = e => {
+        e.preventDefault();
+        fetch(form5.action, {method: 'post', body: new FormData(form5)})
+            .then(result => result.text()).then(html => form5.innerHTML = html).catch(err => console.error(err));
+    }
+</script>

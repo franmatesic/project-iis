@@ -1,0 +1,43 @@
+<form class="d-flex flex-column card p-5 w-75" id="tab6-form" method="post" th:action="@{/api}">
+    <h4>API</h4>
+    <button class="btn btn-primary mt-3" type="submit">Fetch</button>
+
+    <div class="d-flex flex-column gy-1 mt-1">
+        <div class="row gx-1 fw-bold">
+            <p class="col-1">#</p>
+            <p class="col-3">Name</p>
+            <p class="col-1">M</p>
+            <p class="col-1">W</p>
+            <p class="col-1">D</p>
+            <p class="col-1">L</p>
+            <p class="col-1">GF</p>
+            <p class="col-1">GA</p>
+            <p class="col-1">GD</p>
+            <p class="col-1">P</p>
+        </div>
+
+        <th:block th:each="row : ${rows}">
+            <div class="row gx-1">
+                <p class="col-1 fw-bold" th:text="${row.position}"></p>
+                <p class="col-3" th:text="${row.team.shortName}"></p>
+                <p class="col-1" th:text="${row.matches}"></p>
+                <p class="col-1" th:text="${row.wins}"></p>
+                <p class="col-1" th:text="${row.draws}"></p>
+                <p class="col-1" th:text="${row.losses}"></p>
+                <p class="col-1" th:text="${row.scoresFor}"></p>
+                <p class="col-1" th:text="${row.scoresAgainst}"></p>
+                <p class="col-1" th:text="${row.scoresFor - row.scoresAgainst}"></p>
+                <p class="col-1" th:text="${row.points}"></p>
+            </div>
+        </th:block>
+    </div>
+</form>
+
+<script>
+    let form6 = document.getElementById('tab6-form');
+    form6.onsubmit = e => {
+        e.preventDefault();
+        fetch(form6.action, {method: 'post', body: new FormData(form6)})
+            .then(result => result.text()).then(html => form6.innerHTML = html).catch(err => console.error(err));
+    }
+</script>

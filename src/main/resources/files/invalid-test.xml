@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<league name="Premier League">
+  <club name="Arsenal">
+    <games>25</games>
+    <points>60</points>
+  </club>
+  <club>
+    <games>25</games>
+    <points>55</points>
+  </club>
+  <club name="Manchester United">
+    <games>24</games>
+  </club>
+</league>

@@ -1,0 +1,12 @@
+app:
+  api:
+    url: https://sofascores.p.rapidapi.com/v1/seasons/standings?standing_type=total&seasons_id=41886&unique_tournament_id=17
+    host: sofascores.p.rapidapi.com
+    key: 0a256ff688msh3d36fbad8d7217ap11120fjsn2d5eea0492a5
+
+spring:
+  thymeleaf:
+    cache: false
+
+
+

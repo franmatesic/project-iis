@@ -1,0 +1,18 @@
+<element name="league" xmlns="http://relaxng.org/ns/structure/1.0">
+  <attribute name="name">
+    <text/>
+  </attribute>
+  <oneOrMore>
+    <element name="club">
+      <attribute name="name">
+        <text/>
+      </attribute>
+      <element name="games">
+        <text/>
+      </element>
+      <element name="points">
+        <text/>
+      </element>
+    </element>
+  </oneOrMore>
+</element>

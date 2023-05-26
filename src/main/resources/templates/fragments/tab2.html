@@ -1,0 +1,17 @@
+<form class="d-flex flex-column card p-5 w-50" id="tab2-form" method="post" th:action="@{/validateRNG}" enctype="multipart/form-data">
+  <h4>Validate XML based on RNG</h4>
+  <input class="form-control mt-3" type="file" name="fileRNG" accept="application/xml">
+  <p class="m-0 text-end" th:if="${validRNG != null}" th:style="${validRNG.valid? 'color: green' : 'color: red'}"
+     th:text="${validRNG.message}"></p>
+  <p class="m-0" style="height: 1.5rem" th:if="${validRNG == null}"></p>
+  <button class="btn btn-primary mt-3" type="submit">Validate</button>
+</form>
+
+<script>
+  let form2 = document.getElementById('tab2-form');
+  form2.onsubmit = e => {
+    e.preventDefault();
+    fetch(form2.action, {method: 'post', body: new FormData(form2)})
+    .then(result => result.text()).then(html => form2.innerHTML = html).catch(err => console.error(err));
+  }
+</script>

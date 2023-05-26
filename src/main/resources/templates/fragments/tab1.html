@@ -1,0 +1,21 @@
+<form class="d-flex flex-column card p-5 w-50" id="tab1-form" method="post" th:action="@{/validateXSD}" enctype="multipart/form-data">
+  <h4>Validate XML based on XSD</h4>
+
+  <input class="form-control mt-3" type="file" name="fileXSD" accept="application/xml">
+
+  <p class="m-0 text-end" th:if="${validXSD != null}" th:style="${validXSD.valid? 'color: green' : 'color: red'}"
+     th:text="${validXSD.message}"></p>
+
+  <p class="m-0" style="height: 1.5rem" th:if="${validXSD == null}"></p>
+
+  <button class="btn btn-primary mt-3" type="submit">Validate</button>
+</form>
+
+<script>
+  let form1 = document.getElementById('tab1-form');
+  form1.onsubmit = e => {
+    e.preventDefault();
+    fetch(form1.action, {method: 'post', body: new FormData(form1)})
+    .then(result => result.text()).then(html => form1.innerHTML = html).catch(err => console.error(err));
+  }
+</script>
